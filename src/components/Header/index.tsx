@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import { Container } from './styles';
 
@@ -10,17 +10,17 @@ interface HeaderProps {
   size?: 'small' | 'large';
 }
 
-const Header: React.FC<HeaderProps> = ({ size = 'large' }: HeaderProps) => (
-  <Container size={size}>
+const Header: React.FC<HeaderProps> = ({ size = 'large' }: HeaderProps) => {
+  const { pathname } = useLocation();
+  return (<Container size={size}>
     <header>
       <img src={Logo} alt="GoFinances" />
       <nav>
-        {
-          // Todo
-        }
+        <Link to='/' style={{ borderBottom: pathname === '/' ? '2px solid #FF872C' : '', paddingBottom: 10 }}>Listagem</Link>
+        <Link to='/import' style={{ borderBottom: pathname === '/import' ? '2px solid #FF872C' : '', paddingBottom: 10 }}>Importar</Link>
       </nav>
     </header>
-  </Container>
-);
+  </Container>);
+}
 
 export default Header;
